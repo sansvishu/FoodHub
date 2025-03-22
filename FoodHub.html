@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Delivery App</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* General Styles */
         body {
@@ -62,6 +63,11 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-5px);
         }
 
         .restaurant-card img {
@@ -97,6 +103,11 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .food-item:hover {
+            transform: translateY(-5px);
         }
 
         .food-item img {
@@ -156,6 +167,26 @@
 
         .social-sharing a:hover {
             color: #ff6f61;
+        }
+
+        /* Forms */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        form input, form textarea, form button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            background: #ff6f61;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
 
         /* Footer */
@@ -278,11 +309,13 @@
         <!-- Add Restaurant Section -->
         <section id="addRestaurant" style="display:none;">
             <h3>Add New Restaurant</h3>
-            <form>
+            <form id="addRestaurantForm">
                 <label for="restaurantName">Restaurant Name:</label>
                 <input type="text" id="restaurantName" required>
                 <label for="restaurantAddress">Address:</label>
                 <input type="text" id="restaurantAddress" required>
+                <label for="restaurantImage">Upload Image:</label>
+                <input type="file" id="restaurantImage" accept="image/*" required>
                 <button type="submit">Add Restaurant</button>
             </form>
         </section>
@@ -316,10 +349,10 @@
         <!-- Social Media Sharing Section -->
         <div class="social-sharing">
             <h3>Share Food Items on Social Media</h3>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://example.com" target="_blank">Facebook</a>
-            <a href="https://www.instagram.com" target="_blank">Instagram</a>
-            <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20delicious%20food%20at%20https://example.com" target="_blank">WhatsApp</a>
-            <a href="https://twitter.com/intent/tweet?url=https://example.com&text=Check%20out%20this%20delicious%20food!" target="_blank">Twitter</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://example.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20delicious%20food%20at%20https://example.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://twitter.com/intent/tweet?url=https://example.com&text=Check%20out%20this%20delicious%20food!" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
     </section>
 
@@ -386,6 +419,16 @@
         function removeRestaurant() {
             alert("Restaurant removed.");
         }
+
+        // Handle Restaurant Image Upload
+        document.getElementById('addRestaurantForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('restaurantName').value;
+            const address = document.getElementById('restaurantAddress').value;
+            const image = document.getElementById('restaurantImage').files[0];
+            alert(`Restaurant Added: ${name}, Address: ${address}, Image: ${image.name}`);
+            // You can upload the image to a server here
+        });
     </script>
 </body>
 </html>
