@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #ff6f61;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Admin Panel Styles */
+        .admin-panel {
+            margin: 40px 0;
+        }
+
+        .admin-panel h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .admin-panel form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .admin-panel input, .admin-panel textarea, .admin-panel button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .admin-panel button {
+            background: #ff6f61;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Social Media Sharing */
+        .social-sharing {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-sharing a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+        }
+
+        .social-sharing a:hover {
+            color: #ff6f61;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .admin-panel form {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section with Navigation -->
+    <header>
+        <div class="container">
+            <h1>Admin Panel</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#restaurants">Restaurants</a></li>
+                    <li><a href="#orders">My Orders</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Admin Panel Section -->
+    <section class="admin-panel">
+        <div class="container">
+            <h2>Manage Restaurants</h2>
+            <form id="addRestaurantForm">
+                <label for="restaurantName">Restaurant Name:</label>
+                <input type="text" id="restaurantName" required>
+                <label for="restaurantAddress">Address:</label>
+                <input type="text" id="restaurantAddress" required>
+                <label for="restaurantImage">Upload Image:</label>
+                <input type="file" id="restaurantImage" accept="image/*" required>
+                <button type="submit">Add Restaurant</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Food Delivery App. All rights reserved.</p>
+            <div class="social-sharing">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://example.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20delicious%20food%20at%20https://example.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://twitter.com/intent/tweet?url=https://example.com&text=Check%20out%20this%20delicious%20food!" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
