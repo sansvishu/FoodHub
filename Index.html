@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery App - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #ff6f61;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        .hero button {
+            background: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* Featured Restaurants */
+        .featured-restaurants {
+            margin: 40px 0;
+        }
+
+        .featured-restaurants h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .restaurant-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .restaurant-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .restaurant-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .restaurant-card h3 {
+            margin: 10px 0;
+        }
+
+        .restaurant-card button {
+            background: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Popular Food Categories */
+        .food-categories {
+            margin: 40px 0;
+        }
+
+        .food-categories h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .category-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .category-card h3 {
+            margin: 10px 0;
+        }
+
+        /* Call-to-Action Section */
+        .cta {
+            background: #ff6f61;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+
+        .cta h2 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .cta p {
+            margin: 20px 0;
+        }
+
+        .cta button {
+            background: white;
+            color: #ff6f61;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .restaurant-list, .category-list {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section with Navigation -->
+    <header>
+        <div class="container">
+            <h1>Food Delivery App</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#restaurants">Restaurants</a></li>
+                    <li><a href="#orders">My Orders</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Delicious Food Delivered to Your Doorstep</h2>
+            <p>Order from your favorite restaurants and enjoy a hassle-free dining experience.</p>
+            <button>Order Now</button>
+        </div>
+    </section>
+
+    <!-- Featured Restaurants Section -->
+    <section class="featured-restaurants">
+        <div class="container">
+            <h2>Featured Restaurants</h2>
+            <div class="restaurant-list">
+                <div class="restaurant-card">
+                    <img src="https://via.placeholder.com/150" alt="Restaurant 1">
+                    <h3>Pizza Palace</h3>
+                    <button>View Menu</button>
+                </div>
+                <div class="restaurant-card">
+                    <img src="https://via.placeholder.com/150" alt="Restaurant 2">
+                    <h3>Burger Barn</h3>
+                    <button>View Menu</button>
+                </div>
+                <div class="restaurant-card">
+                    <img src="https://via.placeholder.com/150" alt="Restaurant 3">
+                    <h3>Sushi Spot</h3>
+                    <button>View Menu</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Food Categories Section -->
+    <section class="food-categories">
+        <div class="container">
+            <h2>Popular Food Categories</h2>
+            <div class="category-list">
+                <div class="category-card">
+                    <img src="https://via.placeholder.com/150" alt="Pizza">
+                    <h3>Pizza</h3>
+                </div>
+                <div class="category-card">
+                    <img src="https://via.placeholder.com/150" alt="Burger">
+                    <h3>Burgers</h3>
+                </div>
+                <div class="category-card">
+                    <img src="https://via.placeholder.com/150" alt="Sushi">
+                    <h3>Sushi</h3>
+                </div>
+                <div class="category-card">
+                    <img src="https://via.placeholder.com/150" alt="Pasta">
+                    <h3>Pasta</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Order?</h2>
+            <p>Join thousands of satisfied customers and enjoy delicious meals today!</p>
+            <button>Get Started</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Food Delivery App. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
