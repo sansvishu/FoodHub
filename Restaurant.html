@@ -23,11 +23,13 @@
             padding: 20px;
         }
 
+        /* Header Section */
         header {
-            background-color: #ff6f61;
+            background: linear-gradient(135deg, #ff6f61, #ff4d4d);
             color: white;
             padding: 20px 0;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
@@ -48,6 +50,13 @@
             color: white;
             text-decoration: none;
             font-weight: 600;
+            padding: 5px 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
         }
 
         /* Admin Panel Styles */
@@ -63,13 +72,22 @@
         .admin-panel form {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-panel label {
+            font-weight: 600;
         }
 
         .admin-panel input, .admin-panel textarea, .admin-panel button {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 1rem;
         }
 
         .admin-panel button {
@@ -77,6 +95,54 @@
             color: white;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-panel button:hover {
+            background-color: #ff4d4d;
+        }
+
+        /* Restaurant Table */
+        .restaurant-table {
+            margin-top: 40px;
+            overflow-x: auto;
+        }
+
+        .restaurant-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .restaurant-table th, .restaurant-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .restaurant-table th {
+            background: #ff6f61;
+            color: white;
+        }
+
+        .restaurant-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .restaurant-table button {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .restaurant-table button:hover {
+            background-color: #e63939;
         }
 
         /* Footer */
@@ -103,6 +169,7 @@
             text-decoration: none;
             color: white;
             font-size: 24px;
+            transition: color 0.3s ease;
         }
 
         .social-sharing a:hover {
@@ -111,8 +178,17 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
             .admin-panel form {
                 width: 100%;
+            }
+
+            .restaurant-table {
+                overflow-x: auto;
             }
         }
     </style>
@@ -146,6 +222,21 @@
                 <input type="file" id="restaurantImage" accept="image/*" required>
                 <button type="submit">Add Restaurant</button>
             </form>
+
+            <!-- Restaurant Table -->
+            <div class="restaurant-table">
+                <h2>Existing Restaurants</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Restaurant Name</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="restaurantTableBody"></tbody>
+                </table>
+            </div>
         </div>
     </section>
 
@@ -161,5 +252,56 @@
             </div>
         </div>
     </footer>
+
+    <!-- JavaScript for Dynamic Functionality -->
+    <script>
+        // Data to store restaurants
+        let restaurants = [];
+
+        // Form Submission
+        document.getElementById('addRestaurantForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('restaurantName').value;
+            const address = document.getElementById('restaurantAddress').value;
+            const image = document.getElementById('restaurantImage').files[0];
+
+            if (name && address && image) {
+                const restaurant = {
+                    name,
+                    address,
+                    image: URL.createObjectURL(image)
+                };
+                restaurants.push(restaurant);
+                renderRestaurantTable();
+                alert(`Restaurant Added: ${name}`);
+                this.reset();
+            } else {
+                alert("Please fill out all fields.");
+            }
+        });
+
+        // Render Restaurant Table
+        function renderRestaurantTable() {
+            const tableBody = document.getElementById('restaurantTableBody');
+            tableBody.innerHTML = restaurants.map((restaurant, index) => `
+                <tr>
+                    <td>${restaurant.name}</td>
+                    <td>${restaurant.address}</td>
+                    <td>
+                        <button onclick="removeRestaurant(${index})">Remove</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Remove Restaurant
+        function removeRestaurant(index) {
+            restaurants.splice(index, 1);
+            renderRestaurantTable();
+        }
+
+        // Initial Render
+        renderRestaurantTable();
+    </script>
 </body>
 </html>
