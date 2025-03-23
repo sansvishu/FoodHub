@@ -23,6 +23,7 @@
             padding: 20px;
         }
 
+        /* Header Styles */
         header {
             background-color: #ff6f61;
             color: white;
@@ -40,24 +41,32 @@
             padding: 0;
             margin: 0;
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            flex-direction: column; /* Vertical layout */
+            gap: 10px; /* Spacing between items */
+            align-items: center; /* Center items horizontally */
         }
 
         nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: 600;
+            padding: 5px 10px; /* Padding for better clickability */
+            display: block; /* Make the entire area clickable */
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
+            border-radius: 5px;
         }
 
         /* Restaurant List */
-        .restaurant-list {
+        .restaurant-list, .food-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
 
-        .restaurant-card {
+        .restaurant-card, .food-item {
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -66,68 +75,60 @@
             transition: transform 0.3s ease;
         }
 
-        .restaurant-card:hover {
+        .restaurant-card:hover, .food-item:hover {
             transform: translateY(-5px);
         }
 
-        .restaurant-card img {
+        .restaurant-card img, .food-item img {
             width: 100%;
             height: 150px;
             object-fit: cover;
             border-radius: 10px;
         }
 
-        .restaurant-card h3 {
+        .restaurant-card h3, .food-item p {
             margin: 10px 0;
         }
 
-        .restaurant-card button {
+        .restaurant-card button, .food-item button {
             background: #ff6f61;
             color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+            transition: background 0.3s ease;
         }
 
-        /* Food List */
-        .food-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+        .restaurant-card button:hover, .food-item button:hover {
+            background: #ff4d4d;
         }
 
-        .food-item {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
+        /* Cart Section */
+        #cart {
+            display: none;
+            margin-top: 20px;
         }
 
-        .food-item:hover {
-            transform: translateY(-5px);
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
         }
 
-        .food-item img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .food-item button {
-            background: #ff6f61;
+        .cart-item button {
+            background: #ff4d4d;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 5px 10px;
             border-radius: 5px;
             cursor: pointer;
         }
 
         /* Buttons */
-        .checkout-btn, .payment-btn {
+        .checkout-btn, .payment-btn, .back-btn {
             background: #ff6f61;
             color: white;
             border: none;
@@ -135,15 +136,11 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
+            transition: background 0.3s ease;
         }
 
-        .remove-btn {
+        .checkout-btn:hover, .payment-btn:hover, .back-btn:hover {
             background: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
         /* Admin Panel */
@@ -197,6 +194,13 @@
             padding: 10px 0;
             margin-top: 20px;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .restaurant-list, .food-list {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
     </style>
 </head>
 <body>
@@ -208,80 +212,45 @@
                 <ul>
                     <li><a href="#home" onclick="showHome()">Home</a></li>
                     <li><a href="#restaurants" onclick="showRestaurants()">Restaurants</a></li>
-                    <li><a href="#orders" onclick="showOrders()">My Orders</a></li>
+                    <li><a href="#cart" onclick="showCart()">Cart</a></li>
                     <li><a href="#login" onclick="showLogin()">Login</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Main Section for Home -->
+    <!-- Main Sections -->
     <section id="home" class="container">
         <h2>Welcome to Food Delivery!</h2>
         <p>Browse restaurants and order your favorite food!</p>
     </section>
 
-    <!-- Restaurants Section (User Panel) -->
+    <!-- Restaurants Section -->
     <section id="restaurants" class="container" style="display:none;">
         <h2>Available Restaurants</h2>
-        <div class="restaurant-list">
-            <div class="restaurant-card">
-                <img src="https://via.placeholder.com/150" alt="Restaurant 1">
-                <h3>Pizza Palace</h3>
-                <p>Address: 123 Main Street, City</p>
-                <button onclick="viewMenu('Pizza Palace')">View Menu</button>
-            </div>
-            <div class="restaurant-card">
-                <img src="https://via.placeholder.com/150" alt="Restaurant 2">
-                <h3>Burger Barn</h3>
-                <p>Address: 456 Elm Street, City</p>
-                <button onclick="viewMenu('Burger Barn')">View Menu</button>
-            </div>
-            <div class="restaurant-card">
-                <img src="https://via.placeholder.com/150" alt="Restaurant 3">
-                <h3>Sushi Spot</h3>
-                <p>Address: 789 Oak Street, City</p>
-                <button onclick="viewMenu('Sushi Spot')">View Menu</button>
-            </div>
-        </div>
+        <div class="restaurant-list" id="restaurantList"></div>
     </section>
 
-    <!-- Restaurant Menu (User Panel) -->
+    <!-- Restaurant Menu Section -->
     <div id="menu" class="container" style="display:none;">
+        <button class="back-btn" onclick="showRestaurants()">Back to Restaurants</button>
         <h2>Menu for <span id="restaurantName"></span></h2>
-        <div class="food-list">
-            <div class="food-item">
-                <img src="https://via.placeholder.com/150" alt="Food Item 1">
-                <p>Margherita Pizza</p>
-                <p>Price: ₹200</p>
-                <button onclick="addToCart()">Add to Cart</button>
-            </div>
-            <div class="food-item">
-                <img src="https://via.placeholder.com/150" alt="Food Item 2">
-                <p>Pepperoni Pizza</p>
-                <p>Price: ₹250</p>
-                <button onclick="addToCart()">Add to Cart</button>
-            </div>
-            <div class="food-item">
-                <img src="https://via.placeholder.com/150" alt="Food Item 3">
-                <p>Veggie Burger</p>
-                <p>Price: ₹150</p>
-                <button onclick="addToCart()">Add to Cart</button>
-            </div>
-            <div class="food-item">
-                <img src="https://via.placeholder.com/150" alt="Food Item 4">
-                <p>Cheeseburger</p>
-                <p>Price: ₹180</p>
-                <button onclick="addToCart()">Add to Cart</button>
-            </div>
-        </div>
-        <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        <div class="food-list" id="foodList"></div>
     </div>
 
-    <!-- Checkout Section (User Panel) -->
+    <!-- Cart Section -->
+    <section id="cart" class="container" style="display:none;">
+        <button class="back-btn" onclick="showRestaurants()">Back to Restaurants</button>
+        <h2>Your Cart</h2>
+        <div id="cartItems"></div>
+        <p>Total: ₹<span id="totalPrice">0</span></p>
+        <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    </section>
+
+    <!-- Checkout Section -->
     <section id="checkout" class="container" style="display:none;">
         <h2>Checkout</h2>
-        <p>Total: ₹400</p>
+        <p>Total: ₹<span id="checkoutTotal">0</span></p>
         <button class="payment-btn" onclick="payWithUPI()">Pay with UPI</button>
         <button class="payment-btn" onclick="payWithQRCode()">Pay with QR Code</button>
     </section>
@@ -289,14 +258,14 @@
     <!-- Login Section -->
     <section id="login" class="container" style="display:none;">
         <h2>Login</h2>
-        <form>
-            <input type="text" placeholder="Username" id="username">
-            <input type="password" placeholder="Password" id="password">
+        <form id="loginForm">
+            <input type="text" placeholder="Username" id="username" required>
+            <input type="password" placeholder="Password" id="password" required>
             <button type="submit">Login</button>
         </form>
     </section>
 
-    <!-- Admin Panel (For Admin to Add/Remove Restaurants) -->
+    <!-- Admin Panel -->
     <section id="admin" class="container">
         <h2>Admin Panel</h2>
         <nav>
@@ -331,29 +300,9 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Pizza Palace</td>
-                        <td>123 Main Street, City</td>
-                        <td><button class="remove-btn" onclick="removeRestaurant()">Remove</button></td>
-                    </tr>
-                    <tr>
-                        <td>Burger Barn</td>
-                        <td>456 Elm Street, City</td>
-                        <td><button class="remove-btn" onclick="removeRestaurant()">Remove</button></td>
-                    </tr>
-                </tbody>
+                <tbody id="manageRestaurantsTable"></tbody>
             </table>
         </section>
-
-        <!-- Social Media Sharing Section -->
-        <div class="social-sharing">
-            <h3>Share Food Items on Social Media</h3>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://example.com" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20delicious%20food%20at%20https://example.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://twitter.com/intent/tweet?url=https://example.com&text=Check%20out%20this%20delicious%20food!" target="_blank"><i class="fab fa-twitter"></i></a>
-        </div>
     </section>
 
     <!-- Footer -->
@@ -361,51 +310,121 @@
         <p>&copy; 2025 Food Delivery App</p>
     </footer>
 
-    <!-- JavaScript for interactivity -->
+    <!-- JavaScript -->
     <script>
-        // Show Sections for different user types
+        // Data
+        let restaurants = [
+            { name: "Pizza Palace", address: "123 Main Street, City", image: "https://via.placeholder.com/150" },
+            { name: "Burger Barn", address: "456 Elm Street, City", image: "https://via.placeholder.com/150" },
+            { name: "Sushi Spot", address: "789 Oak Street, City", image: "https://via.placeholder.com/150" }
+        ];
+
+        let menu = {
+            "Pizza Palace": [
+                { name: "Margherita Pizza", price: 200, image: "https://via.placeholder.com/150" },
+                { name: "Pepperoni Pizza", price: 250, image: "https://via.placeholder.com/150" }
+            ],
+            "Burger Barn": [
+                { name: "Veggie Burger", price: 150, image: "https://via.placeholder.com/150" },
+                { name: "Cheeseburger", price: 180, image: "https://via.placeholder.com/150" }
+            ],
+            "Sushi Spot": [
+                { name: "Sushi Roll", price: 300, image: "https://via.placeholder.com/150" },
+                { name: "Sashimi", price: 350, image: "https://via.placeholder.com/150" }
+            ]
+        };
+
+        let cart = [];
+        let totalPrice = 0;
+
+        // Navigation Functions
         function showHome() {
+            hideAllSections();
             document.getElementById('home').style.display = 'block';
-            document.getElementById('restaurants').style.display = 'none';
-            document.getElementById('menu').style.display = 'none';
-            document.getElementById('checkout').style.display = 'none';
-            document.getElementById('login').style.display = 'none';
         }
 
         function showRestaurants() {
+            hideAllSections();
             document.getElementById('restaurants').style.display = 'block';
-            document.getElementById('home').style.display = 'none';
+            renderRestaurants();
         }
 
-        function showAdminPanel() {
-            document.getElementById('admin').style.display = 'block';
-            document.getElementById('home').style.display = 'none';
+        function showCart() {
+            hideAllSections();
+            document.getElementById('cart').style.display = 'block';
+            renderCart();
         }
 
-        function showAddRestaurant() {
-            document.getElementById('addRestaurant').style.display = 'block';
-            document.getElementById('manageRestaurants').style.display = 'none';
+        function showLogin() {
+            hideAllSections();
+            document.getElementById('login').style.display = 'block';
         }
 
-        function showManageRestaurants() {
-            document.getElementById('manageRestaurants').style.display = 'block';
-            document.getElementById('addRestaurant').style.display = 'none';
+        function hideAllSections() {
+            const sections = ['home', 'restaurants', 'menu', 'cart', 'checkout', 'login'];
+            sections.forEach(section => document.getElementById(section).style.display = 'none');
         }
 
-        // Menu and Cart Functions
+        // Render Functions
+        function renderRestaurants() {
+            const restaurantList = document.getElementById('restaurantList');
+            restaurantList.innerHTML = restaurants.map(restaurant => `
+                <div class="restaurant-card">
+                    <img src="${restaurant.image}" alt="${restaurant.name}">
+                    <h3>${restaurant.name}</h3>
+                    <p>${restaurant.address}</p>
+                    <button onclick="viewMenu('${restaurant.name}')">View Menu</button>
+                </div>
+            `).join('');
+        }
+
         function viewMenu(restaurant) {
-            document.getElementById('restaurantName').innerText = restaurant;
+            hideAllSections();
             document.getElementById('menu').style.display = 'block';
-            document.getElementById('restaurants').style.display = 'none';
+            document.getElementById('restaurantName').innerText = restaurant;
+            renderFoodItems(restaurant);
         }
 
-        function addToCart() {
-            alert("Item added to cart!");
+        function renderFoodItems(restaurant) {
+            const foodList = document.getElementById('foodList');
+            foodList.innerHTML = menu[restaurant].map(item => `
+                <div class="food-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <p>${item.name}</p>
+                    <p>Price: ₹${item.price}</p>
+                    <button onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(itemName, price) {
+            cart.push({ name: itemName, price: price });
+            totalPrice += price;
+            alert(`${itemName} added to cart!`);
+            renderCart();
+        }
+
+        function renderCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <span>${item.name} - ₹${item.price}</span>
+                    <button onclick="removeFromCart('${item.name}', ${item.price})">Remove</button>
+                </div>
+            `).join('');
+            document.getElementById('totalPrice').innerText = totalPrice;
+        }
+
+        function removeFromCart(itemName, price) {
+            cart = cart.filter(item => item.name !== itemName);
+            totalPrice -= price;
+            renderCart();
         }
 
         function checkout() {
+            hideAllSections();
             document.getElementById('checkout').style.display = 'block';
-            document.getElementById('menu').style.display = 'none';
+            document.getElementById('checkoutTotal').innerText = totalPrice;
         }
 
         function payWithUPI() {
@@ -416,19 +435,48 @@
             alert("Paying with QR Code...");
         }
 
-        function removeRestaurant() {
-            alert("Restaurant removed.");
+        // Admin Functions
+        function showAddRestaurant() {
+            document.getElementById('addRestaurant').style.display = 'block';
+            document.getElementById('manageRestaurants').style.display = 'none';
         }
 
-        // Handle Restaurant Image Upload
+        function showManageRestaurants() {
+            document.getElementById('manageRestaurants').style.display = 'block';
+            document.getElementById('addRestaurant').style.display = 'none';
+            renderManageRestaurants();
+        }
+
+        function renderManageRestaurants() {
+            const manageRestaurantsTable = document.getElementById('manageRestaurantsTable');
+            manageRestaurantsTable.innerHTML = restaurants.map(restaurant => `
+                <tr>
+                    <td>${restaurant.name}</td>
+                    <td>${restaurant.address}</td>
+                    <td><button class="remove-btn" onclick="removeRestaurant('${restaurant.name}')">Remove</button></td>
+                </tr>
+            `).join('');
+        }
+
+        function removeRestaurant(name) {
+            restaurants = restaurants.filter(restaurant => restaurant.name !== name);
+            renderManageRestaurants();
+            renderRestaurants();
+        }
+
         document.getElementById('addRestaurantForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const name = document.getElementById('restaurantName').value;
             const address = document.getElementById('restaurantAddress').value;
             const image = document.getElementById('restaurantImage').files[0];
-            alert(`Restaurant Added: ${name}, Address: ${address}, Image: ${image.name}`);
-            // You can upload the image to a server here
+            restaurants.push({ name, address, image: URL.createObjectURL(image) });
+            alert(`Restaurant Added: ${name}`);
+            renderRestaurants();
+            this.reset();
         });
+
+        // Initial Render
+        showHome();
     </script>
 </body>
 </html>
